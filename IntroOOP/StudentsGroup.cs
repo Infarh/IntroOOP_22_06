@@ -1,10 +1,6 @@
 ﻿namespace IntroOOP;
 
-public class StudentsGroup
+public class StudentsGroup : NamedItem
 {
-    public int Id { get; set; }
-
-    public string Name { get; set; }
-
-    public List<Student> Students { get; set; } = new();
+    public List<Student123> Students { get; set; } = new();
 }
