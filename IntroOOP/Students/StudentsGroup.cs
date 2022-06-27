@@ -1,4 +1,6 @@
-﻿namespace IntroOOP;
+﻿using IntroOOP.Students.Base;
+
+namespace IntroOOP.Students;
 
 public class StudentsGroup : NamedItem
 {
