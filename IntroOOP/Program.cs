@@ -19,7 +19,9 @@ for (var t = 0.0; t < T; t += dt)
     car1.Move(dt);
     car2.Move(dt);
 
-    car1.Acceleration = new Vector2D(1 / (1 + Math.Exp(-(t - 5) / 2)), 0);
+    car1.Acceleration = new Vector2D(
+        1 / (1 + Math.Exp(-(t - 5) / 2)),
+        1 / (1 + Math.Exp(-(t - 2) / 1.3)));
 
     Console.WriteLine("t = {0:f1}", t);
 

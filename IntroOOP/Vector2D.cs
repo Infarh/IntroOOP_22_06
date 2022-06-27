@@ -1,12 +1,22 @@
 ﻿namespace IntroOOP;
 
-public class Vector2D
+public struct Vector2D
 {
     public double X { get; set; }
 
     public double Y { get; set; }
 
-    public Vector2D() { }
+    public double Length
+    {
+        get
+        {
+            return Math.Sqrt(X * X + Y * Y);
+        }
+    }
+
+    public double Angle => Math.Atan2(Y, X);
+
+    //public Vector2D() { }
 
     public Vector2D(double x, double y)
     {

@@ -9,13 +9,13 @@ public class Car
         return __KnownCars.Count;
     }
 
-    private Vector2D _Location = new Vector2D();
+    private Vector2D _Location;
 
     public Vector2D Location { get => _Location; set => _Location = value; }
 
-    public Vector2D Speed { get; set; } = new();
+    public Vector2D Speed { get; set; }
 
-    public Vector2D Acceleration { get; set; } = new();
+    public Vector2D Acceleration { get; set; }
 
     public string Name { get; set; }
 
@@ -42,6 +42,10 @@ public class Car
 
     public void PrintPosition()
     {
-        Console.WriteLine("{0} находится в точке {1:f3} м и имеет скорость {2:f2} м/с", Name, _Location, Speed);
+        Console.WriteLine("{0} находится в точке {1:f3} м и имеет скорость {2:f2} м/с угол движения {3:f2}°", 
+            Name, 
+            _Location.Length, 
+            Speed.Length,
+            Speed.Angle * 180 / Math.PI);
     }
 }
