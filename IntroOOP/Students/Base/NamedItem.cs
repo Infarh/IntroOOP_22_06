@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IntroOOP;
+namespace IntroOOP.Students.Base;
 
 public class NamedItem
 {
