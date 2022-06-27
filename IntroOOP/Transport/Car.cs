@@ -9,87 +9,39 @@ public class Car
         return __KnownCars.Count;
     }
 
-    private double _X;
+    private Vector2D _Location = new Vector2D();
 
-    private double _Speed;
+    public Vector2D Location { get => _Location; set => _Location = value; }
 
-    public double GetX()
-    {
-        return _X;
-    }
+    public Vector2D Speed { get; set; } = new();
 
-    public void SetX(double x)
-    {
-        _X = x;
-    }
-
-    public double ReadOnlyX => _X;
-
-    public double X
-    {
-        get
-        {
-            return _X;
-        }
-        set
-        {
-            _X = value;
-        }
-    }
-
-    public double GetSpeed()
-    {
-        return _Speed;
-    }
-
-    public void SetSpeed(double speed)
-    {
-        _Speed = speed;
-    }
-
-    public double Speed
-    {
-        get => _Speed;
-        set => _Speed = value;
-    }
-
-    public double Acceleration { get; set; }
-
-    //private string _Name;
-
-    //public string Name
-    //{
-    //    get => _Name;
-    //    set => _Name = value;
-    //}
-
-    //private string '<Name>k__BackingField';
+    public Vector2D Acceleration { get; set; } = new();
 
     public string Name { get; set; }
-
 
     public Car() // Конструктор по умолчанию
     {
         Name = "Машина!";
-        _X = 50;
-        _Speed = 3;
     }
 
-    public Car(string name, double x, double speed)
+    public Car(string name, Vector2D location, Vector2D speed)
     {
         Name = name;
-        _X = x;
-        _Speed = speed;
+        _Location = location;
+        Speed = speed;
     }
 
     public void Move(double dt)
     {
-        _Speed += Acceleration * dt;
-        _X += _Speed * dt + Acceleration * dt * dt * 0.5;
+        Speed = Speed.Add(Acceleration.Mul(dt));
+        _Location = _Location.Add(Speed.Mul(dt).Add(Acceleration.Mul(dt * dt * 0.5)));
+
+        //_Speed += Acceleration * dt;
+        //_X += _Speed * dt + Acceleration * dt * dt * 0.5;
     }
 
     public void PrintPosition()
     {
-        Console.WriteLine("{0} находится в точке {1:f3} м и имеет скорость {2:f2} м/с", Name, _X, _Speed);
+        Console.WriteLine("{0} находится в точке {1:f3} м и имеет скорость {2:f2} м/с", Name, _Location, Speed);
     }
 }
