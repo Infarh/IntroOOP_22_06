@@ -53,15 +53,40 @@ public class Car
         set => _Speed = value;
     }
 
-    //private string _Model;
+    //private string _Name;
 
-    //public string Model
+    //public string Name
     //{
-    //    get => _Model;
-    //    set => _Model = value;
+    //    get => _Name;
+    //    set => _Name = value;
     //}
 
-    public string Model { get; set; }
+    //private string '<Name>k__BackingField';
+
+    public string Name { get; set; }
 
 
+    public Car() // Конструктор по умолчанию
+    {
+        Name = "Машина!";
+        _X = 50;
+        _Speed = 3;
+    }
+
+    public Car(string name, double x, double speed)
+    {
+        Name = name;
+        _X = x;
+        _Speed = speed;
+    }
+
+    public void Move(double dt)
+    {
+        _X = _X + _Speed * dt;
+    }
+
+    public void PrintPosition()
+    {
+        Console.WriteLine("{0} находится в точке {1:f3} м и имеет скорость {2:f2} м/с", Name, _X, _Speed);
+    }
 }
