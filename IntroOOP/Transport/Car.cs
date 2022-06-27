@@ -53,6 +53,8 @@ public class Car
         set => _Speed = value;
     }
 
+    public double Acceleration { get; set; }
+
     //private string _Name;
 
     //public string Name
@@ -82,7 +84,8 @@ public class Car
 
     public void Move(double dt)
     {
-        _X = _X + _Speed * dt;
+        _Speed += Acceleration * dt;
+        _X += _Speed * dt + Acceleration * dt * dt * 0.5;
     }
 
     public void PrintPosition()
