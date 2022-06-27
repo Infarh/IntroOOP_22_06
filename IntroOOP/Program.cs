@@ -31,6 +31,11 @@ for (var t = 0.0; t < T; t += dt)
     Console.WriteLine();
 }
 
+var z1 = new Complex(5, 7);
+var z2 = new Complex(6, 2);
+
+var z3 = z1 + z2;
+
 //Console.WriteLine("Скорость машины №2 = {0}", car2.GetSpeed());
 //car2.X = 10;
 //car2.Speed = 3;
