@@ -48,4 +48,9 @@ public class Car
             Speed.Length,
             Speed.Angle * 180 / Math.PI);
     }
+
+    //public override bool Equals(object? obj) { return false; }
+
+    //public static bool operator ==(Car a, Car b) { return false; }
+    //public static bool operator !=(Car a, Car b) { return !(a == b); }
 }
