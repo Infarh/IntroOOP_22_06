@@ -1,6 +1,8 @@
 ﻿using IntroOOP;
 using IntroOOP.Transport;
 
+StringsExperiments.Run();
+
 var car1 = new Car("Lada", new Vector2D(5, 7), new Vector2D(3, 5));
 var car2 = car1;
 var car3 = new Car("Volvo", new(3, 2), new(4, 5));
