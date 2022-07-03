@@ -11,7 +11,7 @@ var cars = new Car[] { car1, car2, car3 };
 
 cars[1].Name = "Lada Kanalya";
 
-ChangeCarLocationTo0(cars[1]);
+ChangeCarLocationTo0(cars[1]); // Изменение положения машинки в начало координат
 
 var car1_hash = car1.GetHashCode();
 var car2_hash = car2.GetHashCode();
