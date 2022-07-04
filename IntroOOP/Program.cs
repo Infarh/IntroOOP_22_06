@@ -24,6 +24,7 @@ var list2 = new RefList<int>();
 list2.AddLast(3);
 list2.AddLast(2);
 list2.AddLast(1);
+list2.AddAfter(node, 101);
 
 foreach (var value in list1)
     Console.WriteLine(value);

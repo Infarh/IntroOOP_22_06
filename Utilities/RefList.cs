@@ -8,13 +8,19 @@ public class RefList<T> : IEnumerable<T>
 {
     public class Node
     {
+        internal RefList<T> List { get; set; }
+
         public T Value { get; set; }
 
         public Node? Prev { get; internal set; }
 
         public Node? Next { get; internal set; }
 
-        internal Node(T value) => Value = value;
+        internal Node(RefList<T> List, T value)
+        {
+            Value = value;
+            this.List = List;
+        }
     }
 
     private int _Count;
@@ -25,7 +31,7 @@ public class RefList<T> : IEnumerable<T>
 
     public Node AddFirst(T value)
     {
-        var node = new Node(value);
+        var node = new Node(this, value);
 
         _Count++;
 
@@ -51,7 +57,7 @@ public class RefList<T> : IEnumerable<T>
 
     public Node AddLast(T value)
     {
-        var node = new Node(value);
+        var node = new Node(this, value);
 
         _Count++;
 
@@ -72,10 +78,13 @@ public class RefList<T> : IEnumerable<T>
 
     public Node AddBefore(Node Position, T value)
     {
+        if (!ReferenceEquals(Position.List, this))
+            throw new InvalidOperationException("Нельзя добавить узел до указанного узла потому, что указанный узел принадлежит другому списку");
+
         if (ReferenceEquals(Position, First))
             return AddFirst(value);
 
-        var node = new Node(value);
+        var node = new Node(this, value);
 
         node.Next = Position;
         node.Prev = Position.Prev;
@@ -90,10 +99,13 @@ public class RefList<T> : IEnumerable<T>
 
     public Node AddAfter(Node Position, T value)
     {
+        if (!ReferenceEquals(Position.List, this))
+            throw new InvalidOperationException("Нельзя добавить узел после указанного узла потому, что указанный узел принадлежит другому списку");
+
         if (ReferenceEquals(Position, Last))
             return AddLast(value);
 
-        var node = new Node(value)
+        var node = new Node(this, value)
         {
             Prev = Position,
             Next = Position.Next,
