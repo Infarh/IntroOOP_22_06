@@ -1,5 +1,8 @@
 ﻿
+using IntroOOP;
 using Utilities;
+
+ReadingDataTest.Run();
 
 var list1 = new RefList<int>();
 
