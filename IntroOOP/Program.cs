@@ -4,8 +4,11 @@ using Utilities;
 var list1 = new RefList<int>();
 
 list1.AddFirst(1);
-list1.AddFirst(2);
+var node = list1.AddFirst(2);
 list1.AddFirst(3);
+
+list1.AddBefore(node, -100);
+list1.AddAfter(node, 100);
 
 var list2 = new RefList<int>();
 

@@ -65,4 +65,41 @@ public class RefList<T>
 
         return node;
     }
+
+    public Node AddBefore(Node Position, T value)
+    {
+        if (ReferenceEquals(Position, First))
+            return AddFirst(value);
+
+        var node = new Node(value);
+
+        node.Next = Position;
+        node.Prev = Position.Prev;
+
+        _Count++;
+
+        Position.Prev = node;
+        node.Prev!.Next = node;
+
+        return node;
+    }
+
+    public Node AddAfter(Node Position, T value)
+    {
+        if (ReferenceEquals(Position, Last))
+            return AddLast(value);
+
+        var node = new Node(value)
+        {
+            Prev = Position,
+            Next = Position.Next,
+        };
+
+        _Count++;
+
+        Position.Next = node;
+        node.Next!.Prev = node;
+
+        return node;
+    }
 }
