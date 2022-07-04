@@ -13,6 +13,8 @@ list1.AddAfter(node, 100);
 
 var sum = list1.Where(value => value % 2 == 0).Sum();
 
+list1.Clear();
+
 //list1.Remove(list1.First);
 //list1.Remove(list1.Last);
 //list1.Remove(node);

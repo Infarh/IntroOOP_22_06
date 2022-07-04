@@ -143,6 +143,21 @@ public class RefList<T> : IEnumerable<T>
         return node.Value;
     }
 
+    public void Clear()
+    {
+        var node = First;
+        while (node is not null)
+        {
+            node.Prev = null;
+            var tmp = node;
+            node = node.Next;
+            tmp.Next = null;
+        }
+
+        _Count = 0;
+        First = Last = null;
+    }
+
     public override string ToString() => string.Join(", ", this);
 
 
