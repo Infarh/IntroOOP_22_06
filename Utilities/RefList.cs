@@ -1,7 +1,10 @@
 ﻿//#nullable disable
+
+using System.Collections;
+
 namespace Utilities;
 
-public class RefList<T>
+public class RefList<T> : IEnumerable<T>
 {
     public class Node
     {
@@ -139,4 +142,23 @@ public class RefList<T>
         _Count--;
         return node.Value;
     }
+
+    public override string ToString() => string.Join(", ", this);
+
+
+    #region IEnumerable<T>
+    
+    public IEnumerator<T> GetEnumerator()
+    {
+        var node = First;
+        while (node is not null)
+        {
+            yield return node.Value;
+            node = node.Next;
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator(); 
+
+    #endregion
 }
