@@ -10,6 +10,10 @@ list1.AddFirst(3);
 list1.AddBefore(node, -100);
 list1.AddAfter(node, 100);
 
+list1.Remove(list1.First);
+list1.Remove(list1.Last);
+list1.Remove(node);
+
 var list2 = new RefList<int>();
 
 list2.AddLast(3);

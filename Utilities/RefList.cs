@@ -1,4 +1,5 @@
-﻿namespace Utilities;
+﻿//#nullable disable
+namespace Utilities;
 
 public class RefList<T>
 {
@@ -101,5 +102,41 @@ public class RefList<T>
         node.Next!.Prev = node;
 
         return node;
+    }
+
+    public T Remove(Node node)
+    {
+        if (ReferenceEquals(First, Last)) // в списке всего один узел
+        {
+            First = null;
+            Last = null;
+            _Count = 0;
+            return node.Value;
+        }
+
+        if (ReferenceEquals(node, First))
+        {
+            First = node.Next;
+            First!.Prev = null;
+            _Count--;
+            return node.Value;
+        }
+
+        if (ReferenceEquals(node, Last))
+        {
+            Last = node.Prev;
+            Last!.Next = null;
+            _Count--;
+            return node.Value;
+        }
+
+        node.Prev!.Next = node.Next;
+        node.Next!.Prev = node.Prev;
+
+        node.Next = null;
+        node.Prev = null;
+
+        _Count--;
+        return node.Value;
     }
 }
