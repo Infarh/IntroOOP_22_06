@@ -23,9 +23,22 @@ public static class ReadingDataTest
 
             var values = line.Split(';');
 
-            var date = DateTime.Parse(values[0].Trim('"'));
-            var temperature = double.Parse(values[1].Trim('"'), CultureInfo.InvariantCulture);
-            var pressure = double.Parse(values[2].Trim('"'), CultureInfo.InvariantCulture);
+            //var date = DateTime.Parse(values[0].Trim('"'));
+            if (!DateTime.TryParse(values[0].Trim('"'), out var date))
+                continue;
+
+            //var temperature = double.Parse(values[1].Trim('"'), CultureInfo.InvariantCulture);
+            if(!double.TryParse(values[1].Trim('"'), NumberStyles.Any, CultureInfo.InvariantCulture, out var temperature))
+                continue;
+
+            //var pressure = double.Parse(values[2].Trim('"'), CultureInfo.InvariantCulture);
+            if (!double.TryParse(values[2].Trim('"'), NumberStyles.Any, CultureInfo.InvariantCulture, out var pressure))
+                continue;
+
+            //var info = new WeatherInfo();
+            //info.Time = date;
+            //info.Temperature = temperature;
+            //info.Pressure = pressure;
 
             var info = new WeatherInfo
             {
