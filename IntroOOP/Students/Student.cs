@@ -16,6 +16,7 @@ public class Student : NamedItem
                 LastName = LastNames[rnd.Next(LastNames.Length)],
                 Name = FirstNames[rnd.Next(FirstNames.Length)],
                 Patronymic = Patronymics[rnd.Next(Patronymics.Length)],
+                Rating = rnd.NextDouble() * 100,
             };
         }
 
@@ -25,4 +26,8 @@ public class Student : NamedItem
     public string LastName { get; set; }
 
     public string Patronymic { get; set; }
+
+    public double Rating { get; set; }
+
+    public override string ToString() => $"[id:{Id}] {LastName} {Name} {Patronymic} : {Rating:f2}";
 }
