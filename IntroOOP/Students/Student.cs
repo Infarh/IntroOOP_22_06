@@ -2,9 +2,9 @@
 
 namespace IntroOOP.Students;
 
-public class Student123 : NamedItem
+public class Student : NamedItem
 {
-    public string LastName123 { get; set; }
+    public string LastName { get; set; }
 
     public string Patronymic { get; set; }
 }
