@@ -2,6 +2,7 @@
 
 namespace IntroOOP.Students;
 
+[Serializable]
 public class Student : NamedItem
 {
     public static Student[] CreateRandomStudents(string[] LastNames, string[] FirstNames, string[] Patronymics, int Count = 1000)
