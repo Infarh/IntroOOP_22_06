@@ -99,4 +99,8 @@ public struct Vector2D
         var k = (v1 * v2) / (v1.Length * v2.Length);
         return Math.Acos(k);
     }
+
+    public static implicit operator double(Vector2D v) => v.Length;
+
+    public static explicit operator Vector2D(double v) => new(v / Math.Sqrt(2), v / Math.Sqrt(2));
 }

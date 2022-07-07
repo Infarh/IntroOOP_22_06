@@ -40,5 +40,9 @@ const double to_rad = Math.PI / 180;
 var v1_v2_angle = (v1 ^ v2) * to_deg;
 var v1_v3_angle = (v1 ^ v3) * to_deg;
 
+double v1_len = v1;
+
+Vector2D v4 = (Vector2D)v1_len;
+
 Console.WriteLine("Конец...");
 Console.ReadLine();
