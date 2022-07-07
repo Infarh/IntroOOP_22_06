@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace IntroOOP.Students.Base;
 
-namespace IntroOOP.Students.Base;
-
+[Serializable]
 public class NamedItem
 {
     public int Id { get; set; }
-    public string Name { get; set; }
 
+    public string Name { get; set; }
 }

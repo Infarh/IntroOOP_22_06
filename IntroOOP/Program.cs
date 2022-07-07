@@ -1,38 +1,48 @@
-﻿
+﻿using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
+using System.Xml.Serialization;
+
 using IntroOOP;
-using Utilities;
+using IntroOOP.Infrastructure;
+using IntroOOP.Students;
 
-ReadingDataTest.Run();
+const string names_file_name = @"Data\Names.txt";
+var data_file = new FileInfo(names_file_name);
 
-var list1 = new RefList<int>();
-
-list1.AddFirst(1);
-var node = list1.AddFirst(2);
-list1.AddFirst(3);
+var (last_names, first_names, patronymics) = data_file.GetNames();
 
 
-list1.AddBefore(node, -100);
-list1.AddAfter(node, 100);
 
-var sum = list1.Where(value => value % 2 == 0).Sum();
+var students = Student.CreateRandomStudents(last_names, first_names, patronymics);
 
-list1.Clear();
+var serializer_xml = new XmlDataSerializer<Student[]>();
+var serializer_bin = new BinaryDataSerializer<Student[]>();
+var serializer_json = new JsonDataSerializer<Student[]>();
+var serializer_json_ident = new JsonDataSerializer<Student[]> { WriteIdent = true };
 
-//list1.Remove(list1.First);
-//list1.Remove(list1.Last);
-//list1.Remove(node);
+const string students_data_file = "students.json";
+Student.SaveToFile(students, students_data_file, "xml");
 
-var list2 = new RefList<int>();
+var result_students = Student.LoadFromFile(students_data_file, "xml");
 
-list2.AddLast(3);
-list2.AddLast(2);
-list2.AddLast(1);
-list2.AddAfter(node, 101);
+var v1 = new Vector2D(5, 0);
 
-foreach (var value in list1)
-    Console.WriteLine(value);
+var v2 = new Vector2D(0, 7);
 
+var v1_1 = v1 / 5;
+var v2_1 = v2 / v2.Length;
 
-//var list_node = new RefList<int>.Node(5);
+var v3 = v1_1 + v2_1;
 
-Console.WriteLine("Hello, World!");
+const double to_deg = 180 / Math.PI;
+const double to_rad = Math.PI / 180;
+
+var v1_v2_angle = (v1 ^ v2) * to_deg;
+var v1_v3_angle = (v1 ^ v3) * to_deg;
+
+double v1_len = v1;
+
+Vector2D v4 = (Vector2D)v1_len;
+
+Console.WriteLine("Конец...");
+Console.ReadLine();
