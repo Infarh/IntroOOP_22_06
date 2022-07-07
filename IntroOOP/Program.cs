@@ -21,9 +21,9 @@ var serializer_json = new JsonDataSerializer<Student[]>();
 var serializer_json_ident = new JsonDataSerializer<Student[]> { WriteIdent = true };
 
 const string students_data_file = "students.json";
-Student.SaveToFile(students, students_data_file, serializer_json);
+Student.SaveToFile(students, students_data_file, "xml");
 
-var result_students = Student.LoadFromFile(students_data_file, serializer_json);
+var result_students = Student.LoadFromFile(students_data_file, "xml");
 
 var v1 = new Vector2D(5, 0);
 

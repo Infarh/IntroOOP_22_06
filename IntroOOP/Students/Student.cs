@@ -6,13 +6,13 @@ namespace IntroOOP.Students;
 [Serializable]
 public class Student : NamedItem
 {
-    public static void SaveToFile(Student[] students, string FileName, DataSerializer<Student[]> serializer)
+    public static void SaveToFile(Student[] students, string FileName, StudentsSerializer serializer)
     {
         using var file = File.Create(FileName);
         serializer.Serialize(students, file);
     }
 
-    public static Student[] LoadFromFile(string FileName, DataSerializer<Student[]> serializer)
+    public static Student[] LoadFromFile(string FileName, StudentsSerializer serializer)
     {
         using var file = File.OpenRead(FileName);
         return serializer.Deserialize(file);
