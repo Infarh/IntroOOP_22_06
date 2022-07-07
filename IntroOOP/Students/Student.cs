@@ -1,10 +1,23 @@
-﻿using IntroOOP.Students.Base;
+﻿using IntroOOP.Infrastructure;
+using IntroOOP.Students.Base;
 
 namespace IntroOOP.Students;
 
 [Serializable]
 public class Student : NamedItem
 {
+    public static void SaveToFile(Student[] students, string FileName, DataSerializer<Student[]> serializer)
+    {
+        using var file = File.Create(FileName);
+        serializer.Serialize(students, file);
+    }
+
+    public static Student[] LoadFromFile(string FileName, DataSerializer<Student[]> serializer)
+    {
+        using var file = File.OpenRead(FileName);
+        return serializer.Deserialize(file);
+    }
+
     public static Student[] CreateRandomStudents(string[] LastNames, string[] FirstNames, string[] Patronymics, int Count = 1000)
     {
         var students = new Student[Count];
