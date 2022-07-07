@@ -25,5 +25,20 @@ Student.SaveToFile(students, students_data_file, serializer_json);
 
 var result_students = Student.LoadFromFile(students_data_file, serializer_json);
 
+var v1 = new Vector2D(5, 0);
+
+var v2 = new Vector2D(0, 7);
+
+var v1_1 = v1 / 5;
+var v2_1 = v2 / v2.Length;
+
+var v3 = v1_1 + v2_1;
+
+const double to_deg = 180 / Math.PI;
+const double to_rad = Math.PI / 180;
+
+var v1_v2_angle = (v1 ^ v2) * to_deg;
+var v1_v3_angle = (v1 ^ v3) * to_deg;
+
 Console.WriteLine("Конец...");
-//Console.ReadLine();
+Console.ReadLine();
