@@ -1,34 +1,23 @@
 ﻿namespace Buildings;
 
-
-public class Building
+public class Building : Structure
 {
-    private readonly int _Id;
-
-    private readonly int _FloorsCount;
+    private int _FloorsCount;
 
     private readonly int _FlatsPerFloorCount;
 
     private readonly double _FloorHeight;
 
-    private readonly int _EntrancesCount;
+    public int FloorsCount { get => _FloorsCount; set => _FloorsCount = value; }
 
-    public int Id => _Id;
-
-    public int FloorsCount => _FloorsCount;
-
-    public int FlatsPerFloorCount => _FlatsPerFloorCount;
+    public int FlatsPerFloorCount { get { return _FlatsPerFloorCount; } }
 
     public double FloorHeight => _FloorHeight;
 
-    public int EntrancesCount => _EntrancesCount;
-
-    public Building(int Id, int FloorsCount, int FlatsPerFloorCount, double FloorHeight, int EntrancesCount)
+    public Building(int Id, int FloorsCount, int FlatsPerFloorCount, double FloorHeight, int EntrancesCount) : base(Id, EntrancesCount)
     {
-        _Id = Id;
         _FloorsCount = FloorsCount;
         _FlatsPerFloorCount = FlatsPerFloorCount;
         _FloorHeight = FloorHeight;
-        _EntrancesCount = EntrancesCount;
     }
 }
