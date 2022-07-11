@@ -3,7 +3,7 @@ using Buildings;
 
 using Utilities.Logging;
 
-BuildingConstructor.Logger = new FileLogger("building.log");
+BuildingConstructor.Logger = new PrefixFileLogger("building.log") { Prefix = " )=>", AddTime = false };
 
 //var building1 = new Building(1, 10, 15, 2.5, 3);
 var building1 = BuildingConstructor.Build(10, 15, 2.5, 3);
@@ -21,4 +21,4 @@ var is_buildings_equals_ref = ReferenceEquals(building1, building2);
 var is_building_equals_to_string = building1.Equals("EntrancesCount=3;FloorHeight=2,5;FloorsCount=10;FlatsPerFloorCount=15");
 
 Console.WriteLine("Конец...");
-Console.ReadLine(); 
+//Console.ReadLine(); 
