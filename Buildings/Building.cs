@@ -17,7 +17,7 @@ public class Building : Structure
 
     public double FloorHeight => _FloorHeight;
 
-    public Building(int Id, int FloorsCount, int FlatsPerFloorCount, double FloorHeight, int EntrancesCount) : base(Id, EntrancesCount)
+    internal Building(int Id, int FloorsCount, int FlatsPerFloorCount, double FloorHeight, int EntrancesCount) : base(Id, EntrancesCount)
     {
         _FloorsCount = FloorsCount;
         _FlatsPerFloorCount = FlatsPerFloorCount;
