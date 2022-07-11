@@ -3,7 +3,10 @@ using Buildings;
 
 using Utilities.Logging;
 
-BuildingConstructor.Logger = new PrefixFileLogger("building.log") { Prefix = " )=>", AddTime = false };
+var log = new List<string>();
+
+//BuildingConstructor.Logger = new PrefixFileLogger("building.log") { Prefix = " )=>", AddTime = false };
+BuildingConstructor.Logger = new ListLogger(log);
 
 //var building1 = new Building(1, 10, 15, 2.5, 3);
 var building1 = BuildingConstructor.Build(10, 15, 2.5, 3);
@@ -22,3 +25,5 @@ var is_building_equals_to_string = building1.Equals("EntrancesCount=3;FloorHeigh
 
 Console.WriteLine("Конец...");
 //Console.ReadLine(); 
+
+log.ForEach(Console.WriteLine);
