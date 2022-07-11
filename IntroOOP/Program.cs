@@ -9,8 +9,6 @@ watcher.Created += OnTextFileCreated;
 
 watcher.EnableRaisingEvents = true;
 
-
-
 var log = new List<string>();
 
 //BuildingConstructor.Logger = new PrefixFileLogger("building.log") { Prefix = " )=>", AddTime = false };
@@ -23,12 +21,13 @@ var builder = new BuildingConstructor(17, 4, 2.7);
 builder.BuildingCreated += OnNewBuildingCreated;
 
 var builder_bindings = new List<Building>();
-builder.BuildingCreated += OnNewBuildingCreatedAddToList;
+//builder.BuildingCreated += OnNewBuildingCreatedAddToList;
 
-void OnNewBuildingCreatedAddToList(Building NewBuilding)
-{
-    builder_bindings.Add(NewBuilding);
-}
+//void OnNewBuildingCreatedAddToList(Building NewBuilding)
+//{
+//    builder_bindings.Add(NewBuilding);
+//}
+builder.BuildingCreated += NewBuilding => builder_bindings.Add(NewBuilding);
 
 var building2 = builder.Build(15);
 var building3 = builder.Build(3);
