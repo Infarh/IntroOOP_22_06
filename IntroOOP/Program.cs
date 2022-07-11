@@ -1,6 +1,10 @@
 ﻿
 using Buildings;
 
+using Utilities.Logging;
+
+BuildingConstructor.Logger = new FileLogger("building.log");
+
 //var building1 = new Building(1, 10, 15, 2.5, 3);
 var building1 = BuildingConstructor.Build(10, 15, 2.5, 3);
 

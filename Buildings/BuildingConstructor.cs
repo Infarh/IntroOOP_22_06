@@ -1,8 +1,12 @@
-﻿namespace Buildings;
+﻿using Utilities.Logging;
+
+namespace Buildings;
 
 public class BuildingConstructor
 {
     /* - Статическая часть класса ------------------------------------------------------------------------------ */
+
+    public static Logger Logger { get; set; }
 
     private static int _FreeId = 0;
 
@@ -19,6 +23,7 @@ public class BuildingConstructor
         var building = new Building(id, FloorsCount, FlatsPerFloorCount, FloorHeight, EntrancesCount);
 
         __AllBuildings.Add(id, building);
+        Logger?.Log($"Построено здание {building}");
         return building;
     }
 
@@ -44,6 +49,7 @@ public class BuildingConstructor
         var building = new Building(id, _FloorsCount, _FlatsPerFloorCount, _FloorHeight, EntrancesCount);
 
         __AllBuildings.Add(id, building);
+        Logger?.Log($"Построено здание {building} строителем {this}");
         return building;
     }
 }
