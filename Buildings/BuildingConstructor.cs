@@ -29,6 +29,9 @@ public class BuildingConstructor
 
     /* - Не статическая часть класса --------------------------------------------------------------------------- */
 
+    //public event EventHandler<EventArgs> BuildingCreated;
+    public event Action<Building> BuildingCreated;
+
     private int _FloorsCount;
 
     private int _FlatsPerFloorCount;
@@ -50,6 +53,9 @@ public class BuildingConstructor
 
         __AllBuildings.Add(id, building);
         Logger?.Log($"Построено здание {building} строителем {this}");
+
+        BuildingCreated?.Invoke(building);
+
         return building;
     }
 }
