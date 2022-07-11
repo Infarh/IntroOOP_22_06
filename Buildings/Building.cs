@@ -1,5 +1,8 @@
-﻿namespace Buildings;
+﻿using System.Diagnostics;
 
+namespace Buildings;
+
+[DebuggerDisplay("Здание id:{Id}")]
 public class Building : Structure
 {
     private int _FloorsCount;
@@ -44,4 +47,28 @@ public class Building : Structure
             && _FlatsPerFloorCount == other._FlatsPerFloorCount
             && _FloorHeight == other._FloorHeight;
     }
+
+    public override int GetHashCode()
+    {
+        //return HashCode.Combine(EntrancesCount, _FloorsCount, _FlatsPerFloorCount, _FloorHeight);
+
+        var hash = 397; // простое число 0x18D (имеет "случайное" расположение битов 0b110001101)
+
+        unchecked
+        {
+            hash = (hash * 0x18d) ^ EntrancesCount.GetHashCode();
+            hash = (hash * 0x18d) ^ _FloorsCount.GetHashCode();
+            hash = (hash * 0x18d) ^ _FlatsPerFloorCount.GetHashCode();
+            hash = (hash * 0x18d) ^ _FloorHeight.GetHashCode();
+        }
+
+        return hash;
+    }
+
+    public override string ToString() => $"Здание (id:{Id}) подъездов: {EntrancesCount} "
+        + $"этажей: {_FloorsCount} квартир на этаж: {_FlatsPerFloorCount} высота этажа: {_FloorHeight}";
+
+    public static bool operator ==(Building b1, Building b2) => Equals(b1, b2);
+
+    public static bool operator !=(Building b1, Building b2) => !(b1 == b2);
 }
