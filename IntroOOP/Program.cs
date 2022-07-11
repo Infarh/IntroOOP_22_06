@@ -1,48 +1,62 @@
-﻿using System.Runtime.Serialization.Formatters.Binary;
-using System.Text.Json;
-using System.Xml.Serialization;
+﻿
+using Buildings;
 
-using IntroOOP;
-using IntroOOP.Infrastructure;
-using IntroOOP.Students;
+using Utilities.Logging;
 
-const string names_file_name = @"Data\Names.txt";
-var data_file = new FileInfo(names_file_name);
+var watcher = new FileSystemWatcher("Data", "*.txt");
+watcher.Created += OnTextFileCreated;
+//watcher.Created -= OnTextFileCreated;
 
-var (last_names, first_names, patronymics) = data_file.GetNames();
+watcher.EnableRaisingEvents = true;
 
+var log = new List<string>();
 
+//BuildingConstructor.Logger = new PrefixFileLogger("building.log") { Prefix = " )=>", AddTime = false };
+BuildingConstructor.Logger = new ListLogger(log);
 
-var students = Student.CreateRandomStudents(last_names, first_names, patronymics);
+//var building1 = new Building(1, 10, 15, 2.5, 3);
+var building1 = BuildingConstructor.Build(10, 15, 2.5, 3);
 
-var serializer_xml = new XmlDataSerializer<Student[]>();
-var serializer_bin = new BinaryDataSerializer<Student[]>();
-var serializer_json = new JsonDataSerializer<Student[]>();
-var serializer_json_ident = new JsonDataSerializer<Student[]> { WriteIdent = true };
+var builder = new BuildingConstructor(17, 4, 2.7);
+builder.BuildingCreated += OnNewBuildingCreated;
 
-const string students_data_file = "students.json";
-Student.SaveToFile(students, students_data_file, "xml");
+var builder_bindings = new List<Building>();
+//builder.BuildingCreated += OnNewBuildingCreatedAddToList;
 
-var result_students = Student.LoadFromFile(students_data_file, "xml");
+//void OnNewBuildingCreatedAddToList(Building NewBuilding)
+//{
+//    builder_bindings.Add(NewBuilding);
+//}
+builder.BuildingCreated += NewBuilding => builder_bindings.Add(NewBuilding);
 
-var v1 = new Vector2D(5, 0);
+var building2 = builder.Build(15);
+var building3 = builder.Build(3);
 
-var v2 = new Vector2D(0, 7);
+var is_buildings_equals = building1 == building2;
+var is_buildings_equals1 = Equals(building1, building2);
+var is_buildings_equals2 = building1.Equals(building2);
+var is_buildings_equals_ref = ReferenceEquals(building1, building2);
 
-var v1_1 = v1 / 5;
-var v2_1 = v2 / v2.Length;
-
-var v3 = v1_1 + v2_1;
-
-const double to_deg = 180 / Math.PI;
-const double to_rad = Math.PI / 180;
-
-var v1_v2_angle = (v1 ^ v2) * to_deg;
-var v1_v3_angle = (v1 ^ v3) * to_deg;
-
-double v1_len = v1;
-
-Vector2D v4 = (Vector2D)v1_len;
+var is_building_equals_to_string = building1.Equals("EntrancesCount=3;FloorHeight=2,5;FloorsCount=10;FlatsPerFloorCount=15");
 
 Console.WriteLine("Конец...");
 Console.ReadLine();
+
+log.ForEach(Console.WriteLine);
+
+static void OnTextFileCreated(object sender, FileSystemEventArgs e)
+{
+    Console.WriteLine("Создан файл {0}", e.Name);
+
+    using var reader = File.OpenText(e.FullPath);
+    while(!reader.EndOfStream)
+        Console.WriteLine(reader.ReadLine());
+
+    Console.WriteLine("---------------------------");
+    Console.WriteLine();
+}
+
+static void OnNewBuildingCreated(Building building)
+{
+    Console.WriteLine("Создано здание: {0}", building);
+}

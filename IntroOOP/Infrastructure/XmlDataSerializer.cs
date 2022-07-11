@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 using IntroOOP.Students;
 
 namespace IntroOOP.Infrastructure;
@@ -7,6 +9,8 @@ public class XmlDataSerializer<T> : DataSerializer<T>
 {
     private static readonly XmlSerializer __Serializer = new(typeof(T));
 
+    public bool WriteIdent { get; set; }
+
     public override T Deserialize(Stream stream)
     {
         return (T)__Serializer.Deserialize(stream)!;
@@ -14,7 +18,13 @@ public class XmlDataSerializer<T> : DataSerializer<T>
 
     public override void Serialize(T value, Stream stream)
     {
-        __Serializer.Serialize(stream, value);
+        if (WriteIdent)
+        {
+            var writer = new XmlTextWriter(stream, Encoding.UTF8) { Formatting = Formatting.Indented };
+            __Serializer.Serialize(writer, value);
+        }
+        else
+            __Serializer.Serialize(stream, value);
     }
 }
 
