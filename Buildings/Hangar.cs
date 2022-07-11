@@ -9,3 +9,4 @@ public class Hangar : Structure
         this.Square = Square;
     }
 }
+    

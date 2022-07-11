@@ -20,4 +20,28 @@ public class Building : Structure
         _FlatsPerFloorCount = FlatsPerFloorCount;
         _FloorHeight = FloorHeight;
     }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is null) return false;
+
+        if (obj is string)
+        {
+            var str = (string)obj;
+            if (!str.Contains($"EntrancesCount={EntrancesCount}")) return false;
+            if (!str.Contains($"FloorsCount={_FloorsCount}")) return false;
+            if (!str.Contains($"FlatsPerFloorCount={_FlatsPerFloorCount}")) return false;
+            if (!str.Contains($"FloorHeight={_FloorHeight}")) return false;
+            return true;
+        }
+
+        if (obj.GetType() != typeof(Building)) return false;
+
+        var other = (Building)obj;
+
+        return EntrancesCount == other.EntrancesCount
+            && _FloorsCount == other._FloorsCount
+            && _FlatsPerFloorCount == other._FlatsPerFloorCount
+            && _FloorHeight == other._FloorHeight;
+    }
 }
