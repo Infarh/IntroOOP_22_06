@@ -28,21 +28,29 @@ student_group.Students.AddRange(students);
 
 RemoveLastStudents(student_group, 20);
 
-var best_students = student_group
-   .OrderByDescending(student => student.Rating)
-   .Take(10)
-   .ToArray();
+//var best_students = student_group
+//   .OrderByDescending(student => student.Rating)
+//   .Take(10)
+//   .ToArray();
 
-var average_best_stud = best_students.Average(s => s.Rating);
+//var average_best_stud = best_students.Average(s => s.Rating);
 
-var last_students = student_group
-   .OrderBy(student => student.Rating)
-   .Take(10)
-   .ToArray();
-var average_last_stud = last_students.Average(s => s.Rating);
+//var last_students = student_group
+//   .OrderBy(student => student.Rating)
+//   .Take(10)
+//   .ToArray();
+//var average_last_stud = last_students.Average(s => s.Rating);
 
 
-var average_rating = student_group.Average(s => s.Rating);
+//var average_rating = student_group.Average(s => s.Rating);
+
+IDictionary<int, Student> stud_dict = student_group;
+var stud_id_5 = stud_dict[5];
+
+//stud_dict.Clear();
+
+IList<Student> students_list = student_group;
+students_list.Clear();
 
 //using AngleSharp.Html.Parser;
 
@@ -115,6 +123,14 @@ var t3 = meteo_service.GetTemperature("МоСкВа");
 
 Console.WriteLine("Конец...");
 Console.ReadLine();
+
+IDictionary<string, int> s_ont;
+
+IList<string> ss;
+ICollection<string> ss0;
+IEnumerable<string> ss_1;
+//ss_1.Select(v => v.Length).Sum();
+
 
 
 static void WatchForWeather(ISynoptic Synoptic, string Place, int Timeout)
