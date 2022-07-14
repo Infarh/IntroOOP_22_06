@@ -1,9 +1,6 @@
 ﻿namespace Utilities.Logging;
 
-public class Logger
+public abstract class Logger : ILogger
 {
-    public virtual void Log(string Message)
-    {
-
-    }
+    public abstract void Log(string Message);
 }

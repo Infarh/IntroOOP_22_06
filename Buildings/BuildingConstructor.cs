@@ -6,7 +6,7 @@ public class BuildingConstructor
 {
     /* - Статическая часть класса ------------------------------------------------------------------------------ */
 
-    public static Logger Logger { get; set; }
+    public static ILogger Logger { get; set; }
 
     private static int _FreeId = 0;
 
