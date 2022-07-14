@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AngleSharp.Css" Version="0.16.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Buildings\Buildings.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
