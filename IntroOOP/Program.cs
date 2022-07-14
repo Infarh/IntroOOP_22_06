@@ -43,9 +43,9 @@ var client = new HttpClient
 var mail = new MailRuWeatherService(client);
 var meteo_service = new MeteoServiceWeather(client);
 
-//var t1 = yandex.GetTemperature();
-var t2 = mail.GetTemperature();
-var t3 = meteo_service.GetTemperature();
+//var t1 = yandex.GetTemperature("moscow);
+var t2 = mail.GetTemperature("moscow");
+var t3 = meteo_service.GetTemperature("МоСкВа");
 
 Console.WriteLine("Конец...");
 Console.ReadLine();

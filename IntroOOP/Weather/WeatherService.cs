@@ -2,5 +2,5 @@
 
 public abstract class WeatherService
 {
-    public abstract double GetTemperature();
+    public abstract double GetTemperature(string Place);
 }

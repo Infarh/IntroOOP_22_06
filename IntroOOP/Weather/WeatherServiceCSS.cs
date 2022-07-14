@@ -14,24 +14,24 @@ public abstract class WeatherServiceCSS : WeatherService
         _SelectorCSS = SelectorCSS;
     }
 
-    protected abstract string GetRequestUrl();
+    protected abstract string? GetRequestUrl(string Place);
 
     protected virtual string ClearString(string DataString)
     {
         return DataString;
     }
 
-    public override double GetTemperature()
+    public override double GetTemperature(string Place)
     {
-        var url = GetRequestUrl();
+        var url = GetRequestUrl(Place);
+        if (url is null)
+            throw new InvalidOperationException($"Неизвестное место {Place}");
 
         var response = _Client.GetAsync(url).Result;
         var html_str = response.Content.ReadAsStringAsync().Result;
 
         var parser = new HtmlParser();
         var doc = parser.ParseDocument(html_str);
-
-        var nodes = doc.QuerySelectorAll(_SelectorCSS).ToArray();
 
         var temp_node = doc.QuerySelector(_SelectorCSS);
         if (temp_node is null)
