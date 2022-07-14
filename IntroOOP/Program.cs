@@ -1,62 +1,152 @@
-﻿
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 using Buildings;
+using IntroOOP.Infrastructure;
+using IntroOOP.Students;
+using IntroOOP.Weather;
 
-using Utilities.Logging;
+using System.Linq;
 
-var watcher = new FileSystemWatcher("Data", "*.txt");
-watcher.Created += OnTextFileCreated;
-//watcher.Created -= OnTextFileCreated;
+var students = new List<Student>();
 
-watcher.EnableRaisingEvents = true;
+for (var i = 1; i <= 1000; i++)
+{
+    students.Add(new()
+    {
+        Id = i,
+        LastName = $"Фамилия-{i}",
+        Name = $"Имя-{i}",
+        Patronymic = $"Отчество-{i}",
+        Rating = Random.Shared.NextDouble() * 100,
+    });
+}
 
-var log = new List<string>();
+RemoveLastStudents(students);
 
-//BuildingConstructor.Logger = new PrefixFileLogger("building.log") { Prefix = " )=>", AddTime = false };
-BuildingConstructor.Logger = new ListLogger(log);
+var student_group = new StudentsGroup();
+student_group.Students.AddRange(students);
 
-//var building1 = new Building(1, 10, 15, 2.5, 3);
-var building1 = BuildingConstructor.Build(10, 15, 2.5, 3);
+RemoveLastStudents(student_group, 20);
 
-var builder = new BuildingConstructor(17, 4, 2.7);
-builder.BuildingCreated += OnNewBuildingCreated;
+//var best_students = student_group
+//   .OrderByDescending(student => student.Rating)
+//   .Take(10)
+//   .ToArray();
 
-var builder_bindings = new List<Building>();
-//builder.BuildingCreated += OnNewBuildingCreatedAddToList;
+//var average_best_stud = best_students.Average(s => s.Rating);
 
-//void OnNewBuildingCreatedAddToList(Building NewBuilding)
-//{
-//    builder_bindings.Add(NewBuilding);
-//}
-builder.BuildingCreated += NewBuilding => builder_bindings.Add(NewBuilding);
+//var last_students = student_group
+//   .OrderBy(student => student.Rating)
+//   .Take(10)
+//   .ToArray();
+//var average_last_stud = last_students.Average(s => s.Rating);
 
-var building2 = builder.Build(15);
-var building3 = builder.Build(3);
 
-var is_buildings_equals = building1 == building2;
-var is_buildings_equals1 = Equals(building1, building2);
-var is_buildings_equals2 = building1.Equals(building2);
-var is_buildings_equals_ref = ReferenceEquals(building1, building2);
+//var average_rating = student_group.Average(s => s.Rating);
 
-var is_building_equals_to_string = building1.Equals("EntrancesCount=3;FloorHeight=2,5;FloorsCount=10;FlatsPerFloorCount=15");
+IDictionary<int, Student> stud_dict = student_group;
+var stud_id_5 = stud_dict[5];
+
+//stud_dict.Clear();
+
+IList<Student> students_list = student_group;
+students_list.Clear();
+
+//using AngleSharp.Html.Parser;
+
+var rnd = new Random();
+var today = DateTime.Today;
+var user_agent = string.Format("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:{0}.0) Gecko/{2}{3:00}{4:00} Firefox/{0}.0.{1}",
+    rnd.Next(3, 14),
+    rnd.Next(1, 10),
+    rnd.Next(today.Year - 4, today.Year),
+    rnd.Next(12),
+    rnd.Next(30));
+
+var client = new HttpClient
+{
+    DefaultRequestHeaders =
+    {
+        { "User-Agent", user_agent },
+        //{ "accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"},
+        //{ "accept-encoding", "gzip, deflate, br"}
+    }
+};
+
+//client.DefaultRequestHeaders.Add("User-Agent", user_agent);
+//text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+
+//var response = client.GetAsync("https://yandex.ru/pogoda/moscow").Result;
+//var html = response
+//   .EnsureSuccessStatusCode()
+//   .Content
+//   .ReadAsStringAsync()
+//   .Result;
+
+//var parser = new HtmlParser();
+//var doc = parser.ParseDocument(html);
+
+//var temp_node = doc.QuerySelector("div.temp span.temp__value_with-unit");
+//var temp_str = temp_node.InnerHtml;
+
+//var temp = double.Parse(temp_str);
+
+
+//var yandex = new YandexWeather(client);
+var mail = new MailRuWeatherService(client);
+var meteo_service = new MeteoServiceWeather(client);
+
+var student = new Student
+{
+    Id = 1,
+    LastName = "Иванов",
+    Name = "Иван",
+    Patronymic = "Иванович"
+};
+
+BuildingConstructor.Logger = student;
+var constructor = new BuildingConstructor(5, 4, 2.7);
+
+constructor.Build(5);
+constructor.Build(7);
+constructor.Build(3);
+
+//student.Watch("Москва", 2500);
+mail.Watch("Москва", 2500);
+
+//WatchForWeather(student, "Москва", 2500);
+//WatchForWeather(mail, "Москва", 2500);
+
+//var t1 = yandex.GetTemperature("moscow);
+var t2 = mail.GetTemperature("moscow");
+var t3 = meteo_service.GetTemperature("МоСкВа");
 
 Console.WriteLine("Конец...");
 Console.ReadLine();
 
-log.ForEach(Console.WriteLine);
+IDictionary<string, int> s_ont;
 
-static void OnTextFileCreated(object sender, FileSystemEventArgs e)
+IList<string> ss;
+ICollection<string> ss0;
+IEnumerable<string> ss_1;
+//ss_1.Select(v => v.Length).Sum();
+
+
+
+static void WatchForWeather(ISynoptic Synoptic, string Place, int Timeout)
 {
-    Console.WriteLine("Создан файл {0}", e.Name);
+    while (true)
+    {
+        var t = Synoptic.GetTemperature(Place);
+        Console.WriteLine("{0:HH:mm:ss.ff} - {1:f2}", DateTime.Now, t);
 
-    using var reader = File.OpenText(e.FullPath);
-    while(!reader.EndOfStream)
-        Console.WriteLine(reader.ReadLine());
-
-    Console.WriteLine("---------------------------");
-    Console.WriteLine();
+        Thread.Sleep(Timeout);
+    }
 }
 
-static void OnNewBuildingCreated(Building building)
+static void RemoveLastStudents(IList<Student> Students, int Count = 10)
 {
-    Console.WriteLine("Создано здание: {0}", building);
+    var last_students = Students.OrderByDescending(s => s.Rating).Take(Count).ToArray();
+    foreach (var student in last_students)
+        Students.Remove(student);
 }
