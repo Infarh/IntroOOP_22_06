@@ -21,10 +21,22 @@ public class FileManagerLogic
         {
             var input = _UserInterface.ReadLine("> ", false);
 
-            if (input == "quit")
-                can_work = false;
-            else
-                _UserInterface.WriteLine($"Введена команда {input}");
+            switch (input)
+            {
+                case "quit":
+                    can_work = false;
+                    break;
+
+                case "int":
+                    var int_value = _UserInterface.ReadInt("Введите целое число > ", false);
+                    _UserInterface.WriteLine($"Введено: {int_value}");
+                    break;
+
+                case "double":
+                    var double_value = _UserInterface.ReadDouble("Введите вещественное число > ", false);
+                    _UserInterface.WriteLine($"Введено: {double_value}");
+                    break;
+            }
         }
         while (can_work);
     }
