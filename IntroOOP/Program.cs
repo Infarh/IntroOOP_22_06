@@ -1,152 +1,97 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
-using Buildings;
-using IntroOOP.Infrastructure;
-using IntroOOP.Students;
-using IntroOOP.Weather;
+﻿using NStack;
 
-using System.Linq;
+using Terminal.Gui;
 
-var students = new List<Student>();
+//var file = new FileInfo("c:\\123");
 
-for (var i = 1; i <= 1000; i++)
+//file.Attributes |= FileAttributes.Archive;
+//file.Attributes &= ~FileAttributes.Archive;
+
+//var dir = new DirectoryInfo("c:\\123");
+//dir.EnumerateFiles()
+//dir.GetFiles();
+//var drives = DriveInfo.GetDrives();
+
+//File.Create()
+//Directory.EnumerateFiles("c:\\123", "*.*").ToArray();
+
+//Directory.GetFiles("c:\\123", "*.*")
+//Directory.EnumerateFiles("c:\\123", "*.*")
+
+//if (Directory.GetFiles("c:\\123", "*.*").Length > 0)
+//{
+
+//}
+
+//if (Directory.EnumerateFiles("c:\\123", "*.*").Any())
+//{
+//    var total_length = Directory.EnumerateFiles("c:\\123", "*.*", SearchOption.AllDirectories)
+//       .Sum(file => file.Length);
+//}
+
+
+Application.Init();
+var top = Application.Top;
+
+var window = new Window("Файловый менеджер")
 {
-    students.Add(new()
-    {
-        Id = i,
-        LastName = $"Фамилия-{i}",
-        Name = $"Имя-{i}",
-        Patronymic = $"Отчество-{i}",
-        Rating = Random.Shared.NextDouble() * 100,
-    });
+    X = 0,
+    Y = 0,
+    Width = Dim.Fill(),
+    Height = Dim.Fill(),
+};
+top.Add(window);
+
+var menu = new MenuBar(new MenuBarItem[] {
+    new MenuBarItem ("_File", new MenuItem [] {
+        new MenuItem ("_New", "Creates new file", null),
+        new MenuItem ("_Close", "",null),
+        new MenuItem ("_Quit", "", () => { if (Quit()) top.Running = false; })
+    }),
+    new MenuBarItem ("_Edit", new MenuItem [] {
+        new MenuItem ("_Copy", "", null),
+        new MenuItem ("C_ut", "", null),
+        new MenuItem ("_Paste", "", null)
+    })
+});
+
+static bool Quit()
+{
+    var n = MessageBox.Query(50, 7, "Quit Demo", "Are you sure you want to quit this demo?", "Yes", "No");
+    return n == 0;
 }
+top.Add(menu);
 
-RemoveLastStudents(students);
-
-var student_group = new StudentsGroup();
-student_group.Students.AddRange(students);
-
-RemoveLastStudents(student_group, 20);
-
-//var best_students = student_group
-//   .OrderByDescending(student => student.Rating)
-//   .Take(10)
-//   .ToArray();
-
-//var average_best_stud = best_students.Average(s => s.Rating);
-
-//var last_students = student_group
-//   .OrderBy(student => student.Rating)
-//   .Take(10)
-//   .ToArray();
-//var average_last_stud = last_students.Average(s => s.Rating);
-
-
-//var average_rating = student_group.Average(s => s.Rating);
-
-IDictionary<int, Student> stud_dict = student_group;
-var stud_id_5 = stud_dict[5];
-
-//stud_dict.Clear();
-
-IList<Student> students_list = student_group;
-students_list.Clear();
-
-//using AngleSharp.Html.Parser;
-
-var rnd = new Random();
-var today = DateTime.Today;
-var user_agent = string.Format("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:{0}.0) Gecko/{2}{3:00}{4:00} Firefox/{0}.0.{1}",
-    rnd.Next(3, 14),
-    rnd.Next(1, 10),
-    rnd.Next(today.Year - 4, today.Year),
-    rnd.Next(12),
-    rnd.Next(30));
-
-var client = new HttpClient
+var login = new Label("Login: ") { X = 3, Y = 2 };
+var password = new Label("Password: ")
 {
-    DefaultRequestHeaders =
-    {
-        { "User-Agent", user_agent },
-        //{ "accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"},
-        //{ "accept-encoding", "gzip, deflate, br"}
-    }
+    X = Pos.Left(login),
+    Y = Pos.Top(login) + 1
 };
 
-//client.DefaultRequestHeaders.Add("User-Agent", user_agent);
-//text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-
-//var response = client.GetAsync("https://yandex.ru/pogoda/moscow").Result;
-//var html = response
-//   .EnsureSuccessStatusCode()
-//   .Content
-//   .ReadAsStringAsync()
-//   .Result;
-
-//var parser = new HtmlParser();
-//var doc = parser.ParseDocument(html);
-
-//var temp_node = doc.QuerySelector("div.temp span.temp__value_with-unit");
-//var temp_str = temp_node.InnerHtml;
-
-//var temp = double.Parse(temp_str);
-
-
-//var yandex = new YandexWeather(client);
-var mail = new MailRuWeatherService(client);
-var meteo_service = new MeteoServiceWeather(client);
-
-var student = new Student
+var loginText = new TextField("")
 {
-    Id = 1,
-    LastName = "Иванов",
-    Name = "Иван",
-    Patronymic = "Иванович"
+    X = Pos.Right(password),
+    Y = Pos.Top(login),
+    Width = 40
+};
+var passText = new TextField("")
+{
+    Secret = true,
+    X = Pos.Left(loginText),
+    Y = Pos.Top(password),
+    Width = Dim.Width(loginText)
 };
 
-BuildingConstructor.Logger = student;
-var constructor = new BuildingConstructor(5, 4, 2.7);
+window.Add(
+    login, password, loginText, passText,
 
-constructor.Build(5);
-constructor.Build(7);
-constructor.Build(3);
+    new CheckBox(3, 6, "Remember me"),
+    new RadioGroup(3, 8, new ustring[] { "_Personal", "_Company" }, 0),
+    new Button(3, 14, "Ok"),
+    new Button(10, 14, "Cancel"),
+    new Label(3, 18, "Press F9 or ESC plus 9 to activate the menubar")
+);
 
-//student.Watch("Москва", 2500);
-mail.Watch("Москва", 2500);
-
-//WatchForWeather(student, "Москва", 2500);
-//WatchForWeather(mail, "Москва", 2500);
-
-//var t1 = yandex.GetTemperature("moscow);
-var t2 = mail.GetTemperature("moscow");
-var t3 = meteo_service.GetTemperature("МоСкВа");
-
-Console.WriteLine("Конец...");
-Console.ReadLine();
-
-IDictionary<string, int> s_ont;
-
-IList<string> ss;
-ICollection<string> ss0;
-IEnumerable<string> ss_1;
-//ss_1.Select(v => v.Length).Sum();
-
-
-
-static void WatchForWeather(ISynoptic Synoptic, string Place, int Timeout)
-{
-    while (true)
-    {
-        var t = Synoptic.GetTemperature(Place);
-        Console.WriteLine("{0:HH:mm:ss.ff} - {1:f2}", DateTime.Now, t);
-
-        Thread.Sleep(Timeout);
-    }
-}
-
-static void RemoveLastStudents(IList<Student> Students, int Count = 10)
-{
-    var last_students = Students.OrderByDescending(s => s.Rating).Take(Count).ToArray();
-    foreach (var student in last_students)
-        Students.Remove(student);
-}
+Application.Run();
+Application.Shutdown();

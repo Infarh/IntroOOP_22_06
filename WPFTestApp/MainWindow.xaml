@@ -1,0 +1,39 @@
+﻿<Window x:Class="WPFTestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFTestApp"
+        xmlns:viewModels="clr-namespace:WPFTestApp.ViewModels"
+        mc:Ignorable="d"
+        Title="{Binding Title}" 
+        Height="450" Width="800">
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Button Content="Button" Margin="206,113,400,248" RenderTransformOrigin="0.5,0.5" 
+                Click="OnButtonClick">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="RotateAngle"
+                                             Storyboard.TargetProperty="Angle"
+                                             To="360"
+                                             Duration="0:0:0.5"
+                                             AutoReverse="True"
+                                             From="0"
+                                             />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+            <Button.RenderTransform>
+                <RotateTransform x:Name="RotateAngle" Angle="0"/>
+            </Button.RenderTransform>
+        </Button>
+        <TextBox Name="MessageText" Text="{Binding Title}" VerticalAlignment="Top" Margin="10,20"></TextBox>
+        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" Margin="10,20"></TextBox>
+    </Grid>
+</Window>
