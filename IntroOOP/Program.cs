@@ -4,7 +4,7 @@
 //file.Attributes |= FileAttributes.Archive;
 //file.Attributes &= ~FileAttributes.Archive;
 
-var dir = new DirectoryInfo("c:\\123");
+//var dir = new DirectoryInfo("c:\\123");
 //dir.EnumerateFiles()
 //dir.GetFiles();
 //var drives = DriveInfo.GetDrives();
@@ -22,7 +22,8 @@ var dir = new DirectoryInfo("c:\\123");
 
 //if (Directory.EnumerateFiles("c:\\123", "*.*").Any())
 //{
-
+//    var total_length = Directory.EnumerateFiles("c:\\123", "*.*", SearchOption.AllDirectories)
+//       .Sum(file => file.Length);
 //}
 
 Console.WriteLine("End.");
