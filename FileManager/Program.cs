@@ -1,6 +1,8 @@
 ﻿using FileManager;
 
-var manager = new FileManagerLogic();
+var console_ui = new ConsoleUserInterface();
+
+var manager = new FileManagerLogic(console_ui);
 
 
 
