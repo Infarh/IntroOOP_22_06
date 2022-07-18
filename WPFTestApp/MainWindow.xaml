@@ -1,0 +1,23 @@
+﻿<Window x:Class="WPFTestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFTestApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Content="Button" Margin="206,113,400,248" RenderTransformOrigin="0.5,0.5" 
+                Click="OnButtonClick">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-51.403"/>
+                    <RotateTransform Angle="-54.521"/>
+                    <TranslateTransform X="-26.555" Y="37.257"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <TextBox Name="MessageText" Text="qweqwe" VerticalAlignment="Top" Margin="10,20"></TextBox>
+    </Grid>
+</Window>
