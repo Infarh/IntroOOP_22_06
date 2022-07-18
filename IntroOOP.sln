@@ -9,7 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{E55563D9-7659-4DE4-A962-D102730AF66D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buildings", "Buildings\Buildings.csproj", "{062D024D-2222-46AB-AE8C-86643A0139A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buildings", "Buildings\Buildings.csproj", "{062D024D-2222-46AB-AE8C-86643A0139A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManager", "FileManager\FileManager.csproj", "{91BB52B6-6F84-4E5C-A767-FADDF29D5439}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{062D024D-2222-46AB-AE8C-86643A0139A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{062D024D-2222-46AB-AE8C-86643A0139A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{062D024D-2222-46AB-AE8C-86643A0139A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91BB52B6-6F84-4E5C-A767-FADDF29D5439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91BB52B6-6F84-4E5C-A767-FADDF29D5439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91BB52B6-6F84-4E5C-A767-FADDF29D5439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91BB52B6-6F84-4E5C-A767-FADDF29D5439}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
