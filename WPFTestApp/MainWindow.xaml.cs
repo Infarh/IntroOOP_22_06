@@ -23,6 +23,7 @@ namespace WPFTestApp
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         private void OnButtonClick(object sender, RoutedEventArgs e)
