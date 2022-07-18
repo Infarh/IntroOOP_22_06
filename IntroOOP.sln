@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buildings", "Buildings\Buil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManager", "FileManager\FileManager.csproj", "{91BB52B6-6F84-4E5C-A767-FADDF29D5439}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsTestApp", "WinFormsTestApp\WinFormsTestApp.csproj", "{A428FC2F-905F-41B8-8C42-DE80806C2419}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{91BB52B6-6F84-4E5C-A767-FADDF29D5439}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91BB52B6-6F84-4E5C-A767-FADDF29D5439}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91BB52B6-6F84-4E5C-A767-FADDF29D5439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A428FC2F-905F-41B8-8C42-DE80806C2419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A428FC2F-905F-41B8-8C42-DE80806C2419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A428FC2F-905F-41B8-8C42-DE80806C2419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A428FC2F-905F-41B8-8C42-DE80806C2419}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
