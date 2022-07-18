@@ -29,7 +29,10 @@ public class FileManagerLogic
             { "?", help_command },
             { "quit", quit_command },
             { "exit", quit_command },
+            { "cd", new ChangeDirectoryCommand(UserInterface, this) },
         };
+
+        // рефлексия - для автоматизации добавления команд в словарь
     }
 
 
@@ -54,7 +57,7 @@ public class FileManagerLogic
 
             try
             {
-                command.Execute(args);
+                command.Execute(args/*[1..]*/);
             }
             catch (Exception error)
             {
