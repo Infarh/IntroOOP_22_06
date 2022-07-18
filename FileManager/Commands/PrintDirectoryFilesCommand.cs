@@ -7,6 +7,8 @@ public class PrintDirectoryFilesCommand : FileManagerCommand
     private readonly IUserInterface _UserInterface;
     private readonly FileManagerLogic _FileManager;
 
+    public override string Description => "Вывод содержимого директории";
+
     public PrintDirectoryFilesCommand(IUserInterface UserInterface, FileManagerLogic FileManager)
     {
         _UserInterface = UserInterface;

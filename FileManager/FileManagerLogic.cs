@@ -5,6 +5,8 @@ namespace FileManager;
 
 public class FileManagerLogic
 {
+    private bool _CanWork = true;
+
     private readonly IUserInterface _UserInterface;
 
     public DirectoryInfo CurrentDirectory { get; set; } = new("c:\\");
@@ -16,11 +18,17 @@ public class FileManagerLogic
         _UserInterface = UserInterface;
 
         var list_dir_command = new PrintDirectoryFilesCommand(UserInterface, this);
+        var help_command = new HelpCommand(UserInterface, this);
+        var quit_command = new QuitCommand(this);
         Commands = new Dictionary<string, FileManagerCommand>
         {
             { "drives", new ListDrivesCommand(UserInterface) },
             { "dir", list_dir_command },
             { "ListDir", list_dir_command },
+            { "help", help_command },
+            { "?", help_command },
+            { "quit", quit_command },
+            { "exit", quit_command },
         };
     }
 
@@ -29,19 +37,13 @@ public class FileManagerLogic
     {
         _UserInterface.WriteLine("Файловый менеджер v2.0");
 
-        var can_work = true;
+        //var can_work = true;
         do
         {
             var input = _UserInterface.ReadLine("> ", false);
 
             var args = input.Split(' ');
             var command_name = args[0];
-
-            if (command_name == "quit") // todo: реализовать в виде команды
-            {
-                can_work = false;
-                continue;
-            }
 
             if (!Commands.TryGetValue(command_name, out var command))
             {
@@ -60,6 +62,14 @@ public class FileManagerLogic
                 _UserInterface.WriteLine(error.Message);
             }
         }
-        while (can_work);
+        while (_CanWork);
+
+
+        _UserInterface.WriteLine("Логика файлового менеджера завершена. Всего наилучшего!");
+    }
+
+    public void Stop()
+    {
+        _CanWork = false;
     }
 }

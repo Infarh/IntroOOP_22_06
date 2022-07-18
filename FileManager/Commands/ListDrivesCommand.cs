@@ -6,6 +6,8 @@ public class ListDrivesCommand : FileManagerCommand
 {
     private readonly IUserInterface _UserInterface;
 
+    public override string Description => "Вывод списка дисков в системе";
+
     public ListDrivesCommand(IUserInterface UserInterface) => _UserInterface = UserInterface;
 
     public override void Execute(string[] args)
